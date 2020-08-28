@@ -17,7 +17,7 @@ const mod = {
 			throw new Error('OLSKErrorInputNotValid');
 		}
 
-		param1.setItem(param2, param3);
+		param1.setItem(param2, JSON.stringify(param3));
 
 		return param3;
 	},
@@ -35,7 +35,7 @@ const mod = {
 			throw new Error('OLSKErrorInputNotValid');
 		}
 
-		return param1.getItem(param2);
+		return JSON.parse(param1.getItem(param2));
 	},
 
 };

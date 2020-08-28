@@ -49,11 +49,26 @@ describe('OLKSLocalStorageSet', function OLKSLocalStorageSet() {
 	});
 
 	it('calls setItem', function () {
-		const item = uStorage();
+		const item = Object.assign(uStorage(), {
+			setItem () {
+				item.charlie = Array.from(arguments);
+			},
+		});
 
 		mod.OLKSLocalStorageSet(item, 'alfa', 'bravo');
 
-		deepEqual(item._FakeData()['alfa'], 'bravo');
+		deepEqual(item.charlie, ['alfa', '"bravo"']);
+	});
+
+	it('calls JSON.stringify', function () {
+		const item = uStorage();
+
+		mod.OLKSLocalStorageSet(item, 'alfa', {
+			charlie: 'delta',
+			echo () {},
+		});
+
+		deepEqual(item._FakeData()['alfa'], '{"charlie":"delta"}');
 	});
 
 });
@@ -86,6 +101,19 @@ describe('OLKSLocalStorageGet', function OLKSLocalStorageGet() {
 		mod.OLKSLocalStorageSet(item, 'alfa', 'bravo');
 
 		deepEqual(mod.OLKSLocalStorageGet(item, 'alfa'), 'bravo');
+	});
+
+	it('calls JSON.parse', function () {
+		const item = uStorage();
+
+		mod.OLKSLocalStorageSet(item, 'alfa', {
+			charlie: 'delta',
+			echo () {},
+		});
+
+		deepEqual(mod.OLKSLocalStorageGet(item, 'alfa'), {
+			charlie: 'delta',
+		});
 	});
 
 });
