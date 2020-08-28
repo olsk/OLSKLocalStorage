@@ -9,6 +9,9 @@ const uStorage = function () {
 		setItem (param1, param2) {
 			_data[param1] = param2;
 		},
+		getItem (inputData) {
+			return _data[inputData] || null;
+		},
 		_FakeData () {
 			return _data;
 		},
@@ -19,7 +22,7 @@ describe('OLKSLocalStorageSet', function OLKSLocalStorageSet() {
 
 	it('throws error if param1 not localStorage', function() {
 		throws(function() {
-			mod.OLKSLocalStorageSet({});
+			mod.OLKSLocalStorageSet({}, 'alfa', 'bravo');
 		}, /OLSKErrorInputNotValid/);
 	});
 
@@ -35,8 +38,14 @@ describe('OLKSLocalStorageSet', function OLKSLocalStorageSet() {
 		}, /OLSKErrorInputNotValid/);
 	});
 
+	it('throws error if param3 undefined', function() {
+		throws(function() {
+			mod.OLKSLocalStorageSet(uStorage(), 'alfa', undefined);
+		}, /OLSKErrorInputNotValid/);
+	});
+
 	it('returns param3', function () {
-		deepEqual(mod.OLKSLocalStorageSet(uStorage(), 'alfa', 'bravo'), 'bravo')
+		deepEqual(mod.OLKSLocalStorageSet(uStorage(), 'alfa', 'bravo'), 'bravo');
 	});
 
 	it('calls setItem', function () {
@@ -45,6 +54,38 @@ describe('OLKSLocalStorageSet', function OLKSLocalStorageSet() {
 		mod.OLKSLocalStorageSet(item, 'alfa', 'bravo');
 
 		deepEqual(item._FakeData()['alfa'], 'bravo');
+	});
+
+});
+
+describe('OLKSLocalStorageGet', function OLKSLocalStorageGet() {
+
+	it('throws error if param1 not localStorage', function() {
+		throws(function() {
+			mod.OLKSLocalStorageGet({}, 'alfa');
+		}, /OLSKErrorInputNotValid/);
+	});
+
+	it('throws error if param2 not string', function() {
+		throws(function() {
+			mod.OLKSLocalStorageGet(uStorage(), null);
+		}, /OLSKErrorInputNotValid/);
+	});
+
+	it('throws error if param2 not filled', function() {
+		throws(function() {
+			mod.OLKSLocalStorageGet(uStorage(), ' ');
+		}, /OLSKErrorInputNotValid/);
+	});
+
+	it('returns getItem', function () {
+		const item = uStorage();
+
+		deepEqual(mod.OLKSLocalStorageGet(item, 'alfa'), null);
+		
+		mod.OLKSLocalStorageSet(item, 'alfa', 'bravo');
+
+		deepEqual(mod.OLKSLocalStorageGet(item, 'alfa'), 'bravo');
 	});
 
 });
