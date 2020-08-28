@@ -71,6 +71,22 @@ describe('OLKSLocalStorageSet', function OLKSLocalStorageSet() {
 		deepEqual(item._FakeData()['alfa'], '{"charlie":"delta"}');
 	});
 
+	context('falsy', function () {
+
+		it('calls setItem', function () {
+			const item = Object.assign(uStorage(), {
+				removeItem () {
+					item.charlie = Array.from(arguments);
+				},
+			});
+
+			mod.OLKSLocalStorageSet(item, 'alfa', false);
+
+			deepEqual(item.charlie, ['alfa']);
+		});
+	
+	});
+
 });
 
 describe('OLKSLocalStorageGet', function OLKSLocalStorageGet() {
