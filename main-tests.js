@@ -18,7 +18,7 @@ const uStorage = function () {
 	};
 };
 
-describe('OLKSLocalStorageSet', function OLKSLocalStorageSet() {
+describe('OLKSLocalStorageSet', function test_OLKSLocalStorageSet() {
 
 	it('throws error if param1 not localStorage', function() {
 		throws(function() {
@@ -89,7 +89,7 @@ describe('OLKSLocalStorageSet', function OLKSLocalStorageSet() {
 
 });
 
-describe('OLKSLocalStorageGet', function OLKSLocalStorageGet() {
+describe('OLKSLocalStorageGet', function test_OLKSLocalStorageGet() {
 
 	it('throws error if param1 not localStorage', function() {
 		throws(function() {
