@@ -73,7 +73,7 @@ describe('OLKSLocalStorageSet', function test_OLKSLocalStorageSet() {
 
 	context('falsy', function () {
 
-		it('calls setItem', function () {
+		it('calls removeItem', function () {
 			const item = Object.assign(uStorage(), {
 				removeItem () {
 					item.charlie = Array.from(arguments);
