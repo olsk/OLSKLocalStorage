@@ -51,7 +51,7 @@ describe('OLKSLocalStorageSet', function test_OLKSLocalStorageSet() {
 	it('calls setItem', function () {
 		const item = Object.assign(uStorage(), {
 			setItem () {
-				item.charlie = Array.from(arguments);
+				item.charlie = [...arguments];
 			},
 		});
 
@@ -76,7 +76,7 @@ describe('OLKSLocalStorageSet', function test_OLKSLocalStorageSet() {
 		it('calls removeItem', function () {
 			const item = Object.assign(uStorage(), {
 				removeItem () {
-					item.charlie = Array.from(arguments);
+					item.charlie = [...arguments];
 				},
 			});
 
