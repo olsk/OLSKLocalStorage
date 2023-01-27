@@ -27,7 +27,7 @@ const mod = {
 			throw new Error('OLSKErrorInputNotValid');
 		}
 
-		if (typeof param1.setItem !== 'function') {
+		if (typeof param1.getItem !== 'function') {
 			throw new Error('OLSKErrorInputNotValid');
 		}
 
