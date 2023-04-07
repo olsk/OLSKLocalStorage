@@ -1,43 +1,55 @@
-const mod = {
+(function(global, factory) {
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
+		typeof define === 'function' && define.amd ? define(['exports'], factory) :
+			(factory((global.OLSKLocalStorage = global.OLSKLocalStorage || {})));
+}(this, (function(exports) { 'use strict';
 
-	OLKSLocalStorageSet (param1, param2, param3) {
-		if (typeof param1 !== 'object' || param1 === null) {
-			throw new Error('OLSKErrorInputNotValid');
-		}
+	const mod = {
 
-		if (typeof param1.setItem !== 'function') {
-			throw new Error('OLSKErrorInputNotValid');
-		}
+		OLKSLocalStorageSet (param1, param2, param3) {
+			if (typeof param1 !== 'object' || param1 === null) {
+				throw new Error('OLSKErrorInputNotValid');
+			}
 
-		if (typeof param2 !== 'string' || !param2.trim()) {
-			throw new Error('OLSKErrorInputNotValid');
-		}
+			if (typeof param1.setItem !== 'function') {
+				throw new Error('OLSKErrorInputNotValid');
+			}
 
-		if (typeof param3 === 'undefined') {
-			throw new Error('OLSKErrorInputNotValid');
-		}
+			if (typeof param2 !== 'string' || !param2.trim()) {
+				throw new Error('OLSKErrorInputNotValid');
+			}
 
-		param3 ? param1.setItem(param2, JSON.stringify(param3)) : param1.removeItem(param2);
+			if (typeof param3 === 'undefined') {
+				throw new Error('OLSKErrorInputNotValid');
+			}
 
-		return param3;
-	},
+			param3 ? param1.setItem(param2, JSON.stringify(param3)) : param1.removeItem(param2);
 
-	OLKSLocalStorageGet (param1, param2) {
-		if (typeof param1 !== 'object' || param1 === null) {
-			throw new Error('OLSKErrorInputNotValid');
-		}
+			return param3;
+		},
 
-		if (typeof param1.getItem !== 'function') {
-			throw new Error('OLSKErrorInputNotValid');
-		}
+		OLKSLocalStorageGet (param1, param2) {
+			if (typeof param1 !== 'object' || param1 === null) {
+				throw new Error('OLSKErrorInputNotValid');
+			}
 
-		if (typeof param2 !== 'string' || !param2.trim()) {
-			throw new Error('OLSKErrorInputNotValid');
-		}
+			if (typeof param1.getItem !== 'function') {
+				throw new Error('OLSKErrorInputNotValid');
+			}
 
-		return JSON.parse(param1.getItem(param2));
-	},
+			if (typeof param2 !== 'string' || !param2.trim()) {
+				throw new Error('OLSKErrorInputNotValid');
+			}
 
-};
+			return JSON.parse(param1.getItem(param2));
+		},
 
-Object.assign(exports, mod);
+	};
+
+	Object.assign(exports, mod);
+
+	Object.defineProperty(exports, '__esModule', {
+		value: true
+	});
+
+})));
